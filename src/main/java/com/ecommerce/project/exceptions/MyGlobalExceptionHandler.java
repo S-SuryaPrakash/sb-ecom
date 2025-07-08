@@ -1,4 +1,4 @@
-package com.ecommerce.project.com.ecommerce.project.exceptions;
+package com.ecommerce.project.exceptions;
 
 
 import com.ecommerce.project.payload.APIResponse;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
