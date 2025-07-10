@@ -119,7 +119,7 @@ public class ProductServiceImpl implements ProductService {
 
         return modelMapper.map(product,ProductDTO.class);
     }
-
+    //update the product image
     @Override
     public ProductDTO updateProductImage(Long productId, MultipartFile image) throws IOException {
         Product productFromDB = productRepository.findById(productId)
