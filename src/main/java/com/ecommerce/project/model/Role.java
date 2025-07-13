@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,6 +23,8 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(name = "role_name")
     private AppRole roleName;
+
+
 
     public Role(AppRole roleName) {
         this.roleName = roleName;
