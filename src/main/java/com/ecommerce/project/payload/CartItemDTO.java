@@ -1,6 +1,5 @@
 package com.ecommerce.project.payload;
 
-import com.ecommerce.project.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CartItemDTO {
     private Long cartItemId;
-    private CartDTO cartDTO;
-    private Product product;
-
+    private CartDTO cart;
+    private ProductDTO productDTO;
     private Integer quantity;
-    private double discount;
-    private double productPrice;
+    private Double discount;
+    private Double productPrice;
 }

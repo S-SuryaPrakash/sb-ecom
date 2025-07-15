@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class APIResponse {
     public String message;
-    public boolean status;
+    private boolean status;
 }

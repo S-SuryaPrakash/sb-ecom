@@ -2,7 +2,6 @@ package com.ecommerce.project.controller;
 
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.payload.AddressDTO;
-import com.ecommerce.project.repositories.AddressRepository;
 import com.ecommerce.project.service.AddressService;
 import com.ecommerce.project.util.AuthUtil;
 import jakarta.validation.Valid;
@@ -15,53 +14,51 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-
 public class AddressController {
 
     @Autowired
     AuthUtil authUtil;
 
     @Autowired
-    AddressRepository addressRepository;
-
-    @Autowired
     AddressService addressService;
 
     @PostMapping("/addresses")
-    public ResponseEntity<AddressDTO> createAddress(@RequestBody @Valid AddressDTO addressDTO){
+    public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody AddressDTO addressDTO){
         User user = authUtil.loggedInUser();
         AddressDTO savedAddressDTO = addressService.createAddress(addressDTO, user);
-        return new ResponseEntity<AddressDTO>(savedAddressDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedAddressDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/adress")
-    public ResponseEntity<List<AddressDTO>> getAdresseses(){
-        List<AddressDTO> addressList =addressService.getAddresses();
-        return new ResponseEntity<List<AddressDTO>>(addressList, HttpStatus.OK);
+    @GetMapping("/addresses")
+    public ResponseEntity<List<AddressDTO>> getAddresses(){
+        List<AddressDTO> addressList = addressService.getAddresses();
+        return new ResponseEntity<>(addressList, HttpStatus.OK);
     }
 
     @GetMapping("/addresses/{addressId}")
     public ResponseEntity<AddressDTO> getAddressById(@PathVariable Long addressId){
-        AddressDTO addressDTO = addressService.getAddressById(addressId);
-        return new ResponseEntity<AddressDTO>(addressDTO, HttpStatus.OK);
+        AddressDTO addressDTO = addressService.getAddressesById(addressId);
+        return new ResponseEntity<>(addressDTO, HttpStatus.OK);
     }
 
+
     @GetMapping("/users/addresses")
-    public ResponseEntity<List<AddressDTO>>getUserIdAddress(){
+    public ResponseEntity<List<AddressDTO>> getUserAddresses(){
         User user = authUtil.loggedInUser();
-        List<AddressDTO> addressDTOS = addressService.getUserIdAddress(user);
-        return new ResponseEntity<List<AddressDTO>>(addressDTOS, HttpStatus.OK);
+        List<AddressDTO> addressList = addressService.getUserAddresses(user);
+        return new ResponseEntity<>(addressList, HttpStatus.OK);
     }
 
     @PutMapping("/addresses/{addressId}")
-    public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId, @RequestBody AddressDTO addressDTO){
-        AddressDTO updateAddress = addressService.updateAddress(addressId, addressDTO);
-        return new ResponseEntity<AddressDTO>(addressDTO, HttpStatus.OK);
+    public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId
+            , @RequestBody AddressDTO addressDTO){
+        AddressDTO updatedAddress = addressService.updateAddress(addressId, addressDTO);
+        return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
     }
 
     @DeleteMapping("/addresses/{addressId}")
-    public ResponseEntity<String> deleteAddress(@PathVariable Long addressId){
+    public ResponseEntity<String> updateAddress(@PathVariable Long addressId){
         String status = addressService.deleteAddress(addressId);
-        return new ResponseEntity<String>(status, HttpStatus.OK);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }

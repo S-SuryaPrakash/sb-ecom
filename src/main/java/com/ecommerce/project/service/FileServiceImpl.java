@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Service
 public class FileServiceImpl implements FileService {
+
     @Override
     public String uploadImage(String path, MultipartFile file) throws IOException {
         String originalFileName = file.getOriginalFilename();
@@ -18,10 +19,10 @@ public class FileServiceImpl implements FileService {
         String fileName = randomId.concat(originalFileName.substring(originalFileName.lastIndexOf('.')));
         String filePath = path + File.separator + fileName;
 
-
         File folder = new File(path);
         if (!folder.exists())
             folder.mkdir();
+
         Files.copy(file.getInputStream(), Paths.get(filePath));
         return fileName;
     }
